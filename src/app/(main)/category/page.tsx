@@ -15,7 +15,7 @@ function Index() {
           <SideFilter />
         </div>
 
-        <div className=" grid  gap-x-8 gap-y-8 grid-cols-1 md:grid-cols-4 w-full">
+        <div className=" grid  gap-2 grid-cols-1 md:grid-cols-3 w-full">
           {Array.from({ length: 12 }).map((data, index) => (
             <ProductPreview
               key={index}

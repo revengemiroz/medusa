@@ -12,6 +12,7 @@ import { IPricingModuleService } from "@medusajs/types"
  */
 export async function GET(request: NextRequest) {
   const queryParams = Object.fromEntries(request.nextUrl.searchParams)
+  console.log({ queryParams }, "1212121")
 
   const response = await getProducts(queryParams)
 

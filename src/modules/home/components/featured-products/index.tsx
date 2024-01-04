@@ -1,4 +1,6 @@
-import { getProductsList } from "@lib/data"
+"use client"
+
+import { getCategoriesList, getProductsList } from "@lib/data"
 import usePreviews from "@lib/hooks/use-previews"
 import { ProductCollection } from "@medusajs/medusa"
 // import ProductRail from "./product-rail"
@@ -6,11 +8,38 @@ import ProductPreview from "@modules/products/components/product-preview"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import useEmblaCarousel from "embla-carousel-react/components/useEmblaCarousel"
 
+import InfiniteProducts from "@modules/products/components/home-page"
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../../../../@/shadcn/ui/carousel"
+
 const FeaturedProducts = ({
   collections,
+  product_categories,
 }: {
   collections: ProductCollection[]
 }) => {
+  const home_page_category = product_categories && product_categories[0]
+  console.log({ home_page_category })
+
+  const featured = home_page_category?.category_children?.filter(
+    (category) => category.handle == "featured"
+  )
+
+  const best_offers = home_page_category?.category_children?.filter(
+    (category) => category.handle == "best-offers"
+  )
+
+  const whiskey = home_page_category?.category_children?.filter(
+    (category) => category.handle == "whiskey"
+  )
+
+  console.log({ best_offers })
   return (
     <div className="flex flex-col gap-12 my-12">
       {/* <div className="py-12">
@@ -22,172 +51,50 @@ const FeaturedProducts = ({
           ))}
         </ul>
       </div> */}
-      <div className="w-4/5 mx-auto">
+      <div className="w-4/5 mx-auto flex gap-2 flex-col">
         <span className="text-[#F97316] font-semibold text-[24px]">
           Featured Products
         </span>
-        <div className="grid gap-8 md:gap-16 mt-5 grid-cols-1 md:grid-cols-4">
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
+
+        {featured?.map((bestOffer, index) => (
+          <InfiniteProducts
+            params={{
+              limit: 10,
+              category_id: [bestOffer.id],
+              sales_channel_id: ["sc_01HJD6P3JF9VQN5B4KPGRA3DHD"],
             }}
           />
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
-            }}
-          />
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
-            }}
-          />
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
-            }}
-          />
-        </div>
+        ))}
       </div>
 
-      <div className="w-4/5 mx-auto">
+      <div className="w-4/5 mx-auto flex gap-2 flex-col">
         <span className="text-[#F97316] font-semibold text-[24px]">
           Best Offers
         </span>
-        <div className="grid gap-8 md:gap-16 mt-5 grid-cols-1 md:grid-cols-4">
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
+        {best_offers?.map((bestOffer, index) => (
+          <InfiniteProducts
+            params={{
+              limit: 10,
+              category_id: [bestOffer.id],
+              sales_channel_id: ["sc_01HJD6P3JF9VQN5B4KPGRA3DHD"],
             }}
           />
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
-            }}
-          />
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
-            }}
-          />
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
-            }}
-          />
-        </div>
+        ))}
       </div>
 
-      <div className="w-4/5  mx-auto">
-        <span className="text-[#F97316] font-semibold text-[24px]">
+      <div className="w-4/5 mx-auto flex gap-2 flex-col">
+        <span className="text-[#F97316] font-semibold text-[24px] ">
           Whiskey
         </span>
-        <div className="grid  gap-8 md:gap-16 mt-5 grid-cols-1 md:grid-cols-4">
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
+        {whiskey?.map((bestOffer, index) => (
+          <InfiniteProducts
+            params={{
+              limit: 10,
+              category_id: [bestOffer.id],
+              sales_channel_id: ["sc_01HJD6P3JF9VQN5B4KPGRA3DHD"],
             }}
           />
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
-            }}
-          />
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
-            }}
-          />
-          <ProductPreview
-            id=""
-            thumbnail={""}
-            title=""
-            handle={""}
-            price={{
-              calculated_price: "2000",
-              original_price: "2",
-              difference: "2",
-              price_type: "default",
-            }}
-          />
-        </div>
+        ))}
       </div>
     </div>
   )

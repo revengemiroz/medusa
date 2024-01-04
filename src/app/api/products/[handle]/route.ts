@@ -12,6 +12,7 @@ export async function GET(
 ) {
   // Extract the query parameters
   const { handle } = params
+  console.log("here ??? ", { params })
 
   // Initialize the Product Module
   const productService = await initializeProductModule()

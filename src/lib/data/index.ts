@@ -56,6 +56,7 @@ export async function getProductByHandle(
     .catch((err) => {
       throw err
     })
+  console.log("handle", { products })
 
   return {
     products,

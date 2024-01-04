@@ -17,7 +17,7 @@ const FooterNav = () => {
   const { product_categories } = useProductCategories()
 
   return (
-    <div className="border-t border-ui-border-base py-12 px-30 w-screen  text-white bg-[#44403C] ">
+    <div className="border-t border-ui-border-base py-6 px-30 w-screen text-white bg-[#44403C] ">
       <div className=" flex flex-col gap-10 md:gap-16 w-4/5 mx-auto ">
         <div className=" grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-24 ">
           <div className=" flex flex-col gap-3 ">
@@ -50,10 +50,10 @@ const FooterNav = () => {
           </div>
 
           <div className=" flex flex-col font-medium ">
-            <span className="mb-2 text-[#A1A1A1] font-semibold">
+            <span className="mb-4 text-[#A1A1A1] font-semibold">
               Quick Links
             </span>
-            <div className="  flex flex-col text-sm gap-2 ">
+            <div className="  flex flex-col text-sm gap-3 ">
               <span>About</span>
               <span>Shop</span>
               <span>Terms & Conditions</span>
@@ -69,10 +69,10 @@ const FooterNav = () => {
             <FooterPaymentIcon />
           </div>
           <div className=" flex flex-col">
-            <span className="text-[#A1A1A1] font-semibold mb-2">
+            <span className="text-[#A1A1A1] font-semibold mb-4">
               Contact Us
             </span>
-            <div className="  flex flex-col text-sm gap-2 ">
+            <div className="  flex flex-col text-sm gap-3 ">
               <span>New Baneshwor, Kathmandu</span>
               <span>info@myemail.com</span>
               <span>01-543-235</span>

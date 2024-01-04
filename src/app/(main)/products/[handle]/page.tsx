@@ -9,7 +9,6 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  console.log({ params })
   const data = await getProductByHandle(params.handle)
 
   const product = data.products[0]
@@ -30,6 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductPage({ params }: Props) {
+  console.log({ params }, "2222")
+
   const { products } = await getProductByHandle(params.handle).catch((err) => {
     notFound()
   })

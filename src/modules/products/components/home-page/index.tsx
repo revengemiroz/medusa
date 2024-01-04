@@ -10,6 +10,13 @@ import { useEffect, useMemo } from "react"
 import { useInView } from "react-intersection-observer"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/shadcn/ui/carousel"
 
 export type InfiniteProductsType = {
   params: StoreGetProductsParams
@@ -55,6 +62,8 @@ const InfiniteProducts = ({ params, sortBy }: InfiniteProductsType) => {
     sortBy,
   })
 
+  console.log({ previews })
+
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage()
@@ -63,27 +72,35 @@ const InfiniteProducts = ({ params, sortBy }: InfiniteProductsType) => {
   }, [inView, hasNextPage])
 
   return (
-    <div className="flex-1 w-4/5  mx-auto">
-      <ul className="grid grid-cols-4 small:grid-cols-3 medium:grid-cols-4 gap-1 h-full flex-1">
-        {previews.map((p) => (
-          <li key={p.id}>
-            <ProductPreview {...p} />
-          </li>
+    <div>
+      <Carousel opts={{ align: "start" }}>
+        <CarouselContent>
+          {previews.map((p) => (
+            <CarouselItem
+              key={p.id}
+              className="md:basis-1/2 lg:basis-1/3 2xl:basis-1/5 "
+            >
+              <ProductPreview {...p} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+
+      {isLoading &&
+        !previews.length &&
+        repeat(8).map((index) => (
+          <div key={index}>
+            <SkeletonProductPreview />
+          </div>
         ))}
-        {isLoading &&
-          !previews.length &&
-          repeat(8).map((index) => (
-            <li key={index}>
-              <SkeletonProductPreview />
-            </li>
-          ))}
-        {isFetchingNextPage &&
-          repeat(getNumberOfSkeletons(data?.pages)).map((index) => (
-            <li key={index}>
-              <SkeletonProductPreview />
-            </li>
-          ))}
-      </ul>
+      {isFetchingNextPage &&
+        repeat(getNumberOfSkeletons(data?.pages)).map((index) => (
+          <div key={index}>
+            <SkeletonProductPreview />
+          </div>
+        ))}
       {/* <div
         className="py-16 flex justify-center items-center text-small-regular text-gray-700"
         ref={ref}

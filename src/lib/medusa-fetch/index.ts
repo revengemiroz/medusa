@@ -30,6 +30,7 @@ export default async function medusaRequest(
   if (payload?.query) {
     const params = objectToURLSearchParams(payload.query!).toString()
     path = `${path}?${params}`
+    console.log(first)
   }
 
   const limit = payload?.query?.limit || 100

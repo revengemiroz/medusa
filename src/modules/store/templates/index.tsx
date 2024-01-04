@@ -11,14 +11,16 @@ const StoreTemplate = () => {
   const [sortBy, setSortBy] = useState<SortOptions>("created_at")
 
   return (
-    <div className="flex flex-col  small:flex-row small:items-start py-6">
-      <RefinementList
-        refinementList={params}
-        setRefinementList={setParams}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-      />
-      <InfiniteProducts params={params} sortBy={sortBy} />
+    <div className="flex flex-col h-full small:flex-row small:items-start py-6">
+      <div className="w-4/5 mx-auto flex flex-row gap-12">
+        <RefinementList
+          refinementList={params}
+          setRefinementList={setParams}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+        />
+        <InfiniteProducts params={params} sortBy={sortBy} />
+      </div>
     </div>
   )
 }
